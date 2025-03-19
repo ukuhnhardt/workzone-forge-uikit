@@ -1,0 +1,34 @@
+modules:
+  bitbucket:repoPullRequestOverviewPanel:
+    - key: workzone-pull-request-overview-panel
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: workzone-forge-uikit
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+permissions:
+  scopes:
+    - read:repository:bitbucket
+    - write:repository:bitbucket
+    - admin:repository:bitbucket
+    - delete:repository:bitbucket
+    - read:pullrequest:bitbucket
+    - write:pullrequest:bitbucket
+    - read:project:bitbucket
+    - admin:project:bitbucket
+    - read:workspace:bitbucket
+    - read:user:bitbucket
+  external:
+    fetch:
+      backend:
+        - https://api.bitbucket.org
+app:
+  runtime:
+    name: nodejs20.x
+  id: ari:cloud:ecosystem::app/d5d89972-711a-4111-bfc5-a3ee5d817c0a
