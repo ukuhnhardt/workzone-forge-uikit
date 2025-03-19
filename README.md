@@ -42,3 +42,13 @@ export FORGE_USER_VAR_USERN=workzone_account_username
 export FORGE_USER_VAR_PASSW=workzone_account_user_app_password
 ```
 https://developer.atlassian.com/platform/forge/environments-and-versions/
+
+## Bitbucket repo configuration
+It is important that the logged in user that pushes the merge button does not have 'merge' or 'write' permissions for the target branch
+
+<img width="706" alt="image" src="https://github.com/user-attachments/assets/0b37263e-1e36-4a31-a23e-c30e812c6b25" />
+*Logged in user is **different** than merge user*
+
+
+<img width="920" alt="image" src="https://github.com/user-attachments/assets/1e9803d2-3716-4398-b0d4-319455f23a8b" />
+*Only 'Workzone' User has permissions*
