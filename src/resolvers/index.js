@@ -17,7 +17,7 @@ resolver.define("mergePullRequest", async (req) => {
   let upw = btoa(`${process.env["USERN"]}:${process.env["PASSW"]}`);
   console.log("upw", upw, `${process.env["USERN"]}:${process.env["PASSW"]}`);
 
-  console.log("get PR:basicAuth trying node-fetch basic auth");
+  console.log("get PR:basicAuth trying forge-fetch basic auth");
   let response = await forgeFetch(`https://api.bitbucket.org/2.0/repositories/${workspaceId}/${repository.uuid}/pullrequests/${pullRequest.id}`, {
     method: 'GET',
     headers: {
