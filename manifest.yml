@@ -6,9 +6,25 @@ modules:
         function: resolver
       render: native
       title: workzone-forge-uikit
+  trigger:
+    - key: pr-trigger
+      events:
+        - avi:bitbucket:created:pullrequest # Triggered when a pull request is created
+        - avi:bitbucket:updated:pullrequest # Triggered when a pull request is updated
+      function: pr-trigger-handler # Links to the webhook function
   function:
     - key: resolver
       handler: index.handler
+    - key: pr-trigger-handler
+      handler: index.pullRequestTriggerHandler
+remotes:
+  - key: wz-ace-app
+    baseUrl: https://ai-insights-gc.au.ngrok.io
+    operations:
+      - compute
+    auth:
+      appSystemToken:
+          enabled: true
 resources:
   - key: main
     path: src/frontend/index.jsx
@@ -24,10 +40,12 @@ permissions:
     - admin:project:bitbucket
     - read:workspace:bitbucket
     - read:user:bitbucket
+    - read:app-system-token
   external:
     fetch:
       backend:
         - https://api.bitbucket.org
+        - https://bitbucket.org
 app:
   runtime:
     name: nodejs20.x
