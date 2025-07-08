@@ -24,23 +24,28 @@ remotes:
       - compute
     auth:
       appSystemToken:
-          enabled: true
+        enabled: true
 resources:
   - key: main
     path: src/frontend/index.jsx
 permissions:
   scopes:
-    - read:repository:bitbucket
-    - write:repository:bitbucket
-    - admin:repository:bitbucket
-    - delete:repository:bitbucket
-    - read:pullrequest:bitbucket
-    - write:pullrequest:bitbucket
-    - read:project:bitbucket
-    - admin:project:bitbucket
-    - read:workspace:bitbucket
-    - read:user:bitbucket
-    - read:app-system-token
+    read:repository:bitbucket:
+      allowImpersonation: true
+    write:repository:bitbucket:
+      allowImpersonation: true
+    admin:repository:bitbucket: {}
+    delete:repository:bitbucket: {}
+    read:pullrequest:bitbucket:
+      allowImpersonation: true
+    write:pullrequest:bitbucket:
+      allowImpersonation: true
+    read:project:bitbucket: {}
+    admin:project:bitbucket: {}
+    read:workspace:bitbucket: {}
+    read:user:bitbucket: {}
+    read:app-system-token: {}
+    read:permission:bitbucket: {}
   external:
     fetch:
       backend:
@@ -49,4 +54,4 @@ permissions:
 app:
   runtime:
     name: nodejs20.x
-  id: ari:cloud:ecosystem::app/d5d89972-711a-4111-bfc5-a3ee5d817c0a
+  id: ari:cloud:ecosystem::app/dd8bc837-96f3-4599-8c72-6d01bc0bdf43
