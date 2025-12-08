@@ -102,8 +102,25 @@ resolver.define("mergePullRequest", async (req) => {
 
 export const handler = resolver.getDefinitions();
 
-resolver.define('getText', (req) => {
-  console.log("getText", req.context);
-  return 'Hello, Workzone!';
+resolver.define('getMergeRestrictions', async (req) => {
+  console.log("getMergeRestrictions", req.context, req.headers);
+  const { workspaceId, extension } = req.context;
+  const { pullRequest, repository } = extension
+
+  let upw = btoa(`${process.env["USERN"]}:${process.env["PASSW"]}`);
+  console.log("upw", upw, `${process.env["USERN"]}:${process.env["PASSW"]}`);
+
+  let response = await forgeFetch(`https://bitbucket.org/!api/internal/repositories/${workspaceId}/${repository.uuid}/pullrequests/${pullRequest.id}/merge-restrictions`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Basic ${upw}`,
+    },
+    redirect: 'follow'
+  })
+  let data = await response.text();
+  let status = response.status;
+  console.log("get pullrequest merge restrictions:forge-fetch:basicauth resp data", status, response.statusText, data);
+  return JSON.stringify({status: status, statusText: response.statusText, data: data}, null, 2)
+  ;
 });
 
